@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>The Steam Store</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover 500 best-selling PC games at unbeatable prices in Pakistan. All games for just PKR 1499!">
+    <title>500 Best-Selling PC Games - TheSteamStore Pakistan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1A1A2E, #16213E);
+            color: #E0E0E0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Performance optimizations */
+        .will-change {
+            will-change: transform, opacity;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d3748;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00B4D8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0096c7;
+        }
+
+        /* Hero section */
+        .hero-bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            background: linear-gradient(45deg, #1f2937, #1a202c, #2d3748);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(to right, #7c3aed, #6366f1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background-image: linear-gradient(to right, #6366f1, #4f46e5);
+        }
+
+        /* Game grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .column-header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+            border-bottom: 3px solid #00B4D8;
+        }
+        .column-header:hover {
+            transform: translateY(-3px);
+            background: rgba(0, 180, 216, 0.2);
+        }
+
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            height: 1500px;
+            overflow-y: auto;
+            padding-right: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: #00B4D8 #2d3748;
+        }
+
+        .game-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border-left: 3px solid transparent;
+        }
+        .game-item:hover {
+            background: rgba(0, 180, 216, 0.1);
+            transform: translateX(5px);
+            border-left: 3px solid #00B4D8;
+        }
+
+        .game-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .game-item:hover .game-icon {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .game-name {
+            flex-grow: 1;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .game-item:hover .game-name {
+            color: #00B4D8;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #FF6B6B;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .discounted-price {
+            color: #00B894;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Game cards */
+        .game-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to bottom, #1e293b, #0f172a);
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 2rem;
+            border-top: 1px solid rgba(0, 180, 216, 0.3);
+        }
+
+        /* Loading optimization */
+        .lazy {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .lazy.loaded {
+            opacity: 1;
+        }
+
+        /* New styles for contact section and popup */
+        .contact-section {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 180, 216, 0.3);
+        }
+
+        .contact-icon {
+            background: rgba(0, 180, 216, 0.2);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, #1A1A2E, #16213E);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            border: 1px solid #00B4D8;
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: translateY(0);
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: #E0E0E0;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+            .game-list {
+                height: auto;
+                max-height: 300px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            .hero-bg-animation {
+                animation: gradientAnimation 30s ease infinite;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <header class="bg-gray-800 bg-opacity-80 backdrop-blur-md sticky top-0 z-50 shadow-lg rounded-b-lg">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 rounded-md p-2" aria-label="Home">
+                <img src="https://i.postimg.cc/0NBQfnxx/store-logo.png" alt="TheSteamStore Logo" 
+                     class="h-10 w-auto lazy" 
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='https://placehold.co/100x40/2d3748/e2e8f0?text=Logo';">
+                <span class="text-2xl font-bold text-purple-400 hover:text-purple-300 transition duration-300">
+                    THESTEAMSTORE
+                </span>
+            </a>
+            <nav class="mt-4 md:mt-0">
+                <ul class="flex flex-wrap justify-center gap-2 md:gap-6">
+                    <li><a href="#home" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">Home</a></li>
+                    <li><a href="#top-selling-games" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">Top Games</a></li>
+                    <li><a href="#game-listing" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">All Games</a></li>
+                    <li><a href="#about" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">About</a></li>
+                    <li><a href="#contact" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+      <div class="text-center py-4 bg-gray-900 text-3xl md:text-4xl font-bold text-purple-400">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+            THE STEAM STORE
+        </span>
+    </div>
+    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="hero-bg-animation"></div>
+        <div class="relative z-10 p-8 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6 fade-in-up will-change">
+                Unlock Your Next Adventure for Just <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">PKR 1499!</span>
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10 fade-in-up will-change" style="transition-delay: 0.2s;">
+                Discover 500 best-selling PC games at an unbeatable price in Pakistan.
+            </p>
+            <a href="#top-selling-games" class="btn-primary inline-block text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded-full text-lg shadow-lg transition duration-300 fade-in-up will-change" style="transition-delay: 0.4s;">
+                Browse Games Now <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Top Selling Games - Adjusted box sizes -->
+    <section id="top-selling-games" class="py-16 md:py-20 bg-gray-800 rounded-t-lg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 md:mb-16 fade-in-up">Top Selling Games</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <!-- Game Card 1 -->
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.1s;">
+                    <img src="https://products.eneba.games/resized-products/s29Db6ZBVLneuD0t66qnYRamvGDP3p8chLz-3IomxcU_350x200_1x-0.jpeg" 
+                         alt="Grand Theft Auto V" 
+                         class="w-full h-auto object-cover rounded-t-xl lazy" 
+                         loading="lazy"
+                         style="max-height: 720px;">
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Grand Theft Auto V</h3>
+                        <p class="text-gray-400 text-sm mb-4">Experience the critically acclaimed open-world adventure.</p>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
+                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 2 -->
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.2s;">
+                    <img src="https://www.venturegames.com.pk/cdn/shop/files/MarvelsSpiderman2.jpg?v=1706792782" 
+                         alt="Marvel's Spider-Man 2" 
+                         class="w-full h-auto object-cover rounded-t-xl lazy" 
+                         loading="lazy"
+                         style="max-height: 720px;">
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Marvel's Spider-Man 2</h3>
+                        <p class="text-gray-400 text-sm mb-4">Swing through New York and fight crime as the iconic web-slinger.</p>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
+                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 3 -->
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.3s;">
+                    <img src="https://www.venturegames.com.pk/cdn/shop/files/rn-image_picker_lib_temp_b41f3e70-5e44-4fc5-91b1-98ffb1215eb4.jpg?v=1742237604" 
+                         alt="Assassin's Creed Shadows" 
+                         class="w-full h-auto object-cover rounded-t-xl lazy" 
+                         loading="lazy"
+                         style="max-height: 720px;">
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Assassin's Creed Shadows</h3>
+                        <p class="text-gray-400 text-sm mb-4">Unleash your inner assassin in feudal Japan.</p>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
+                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 4 -->
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.4s;">
+                    <img src="https://cms-assets.xboxservices.com/assets/d5/63/d563ebf9-f807-4348-90d4-9f79f0fb3dca.jpg?n=394005000233_GLP-Page-Hero-0_1083x1222_01.jpg" 
+                         alt="Oblivion Remastered" 
+                         class="w-full h-auto object-cover rounded-t-xl lazy" 
+                         loading="lazy"
+                         style="max-height: 720px;">
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Oblivion Remastered</h3>
+                        <p class="text-gray-400 text-sm mb-4">Revisit the classic RPG with stunning modern graphics.</p>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
+                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Listing -->
+    <section id="game-listing" class="py-16 md:py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 md:mb-16 fade-in-up">500 Best-Selling PC Games</h2>
+            <div class="game-grid">
+                <div>
+                    <div class="column-header fade-in-up">
+                        <i class="fas fa-gamepad mr-2"></i> GAME
+                    </div>
+                    <div class="game-list" id="game-list"></div>
+                </div>
+
+                <div>
+                    <div class="column-header fade-in-up">
+                        <i class="fas fa-tag mr-2"></i> ORIGINAL PRICE
+                    </div>
+                    <div class="game-list" id="original-price-list"></div>
+                </div>
+
+                <div>
+                    <div class="column-header fade-in-up">
+                        <i class="fas fa-fire mr-2"></i> DISCOUNTED PRICE
+                    </div>
+                    <div class="game-list" id="discounted-price-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 md:mb-16 fade-in-up">Why Choose TheSteamStore?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
+                <div class="fade-in-up will-change" style="transition-delay: 0.1s;">
+                    <div class="text-purple-400 text-5xl md:text-6xl mb-4">🚀</div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">Instant Delivery</h3>
+                    <p class="text-gray-400">Get your game keys delivered instantly to your inbox after purchase.</p>
+                </div>
+                <div class="fade-in-up will-change" style="transition-delay: 0.2s;">
+                    <div class="text-purple-400 text-5xl md:text-6xl mb-4">🔒</div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">Secure Payments</h3>
+                    <p class="text-gray-400">Shop with confidence using our secure and encrypted payment gateways.</p>
+                </div>
+                <div class="fade-in-up will-change" style="transition-delay: 0.3s;">
+                    <div class="text-purple-400 text-5xl md:text-6xl mb-4">🎮</div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">Unbeatable Price</h3>
+                    <p class="text-gray-400">Enjoy premium Steam games at an incredible price of PKR 1499.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="py-16 md:py-20 bg-gray-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 md:mb-10 fade-in-up">What Our Gamers Say</h2>
+            <div class="max-w-3xl mx-auto bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 mb-10 md:mb-12 fade-in-up will-change" style="transition-delay: 0.2s;">
+                <div class="text-yellow-400 mb-4">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="text-lg md:text-xl text-gray-300 italic mb-6">"TheSteamStore is my go-to for affordable games! The instant delivery is fantastic, and the price of PKR 1499 is simply unbeatable. Highly recommended!"</p>
+                <p class="text-purple-400 font-semibold">- Muhammad Ali, Karachi</p>
+            </div>
+            <a href="#game-listing" class="btn-primary inline-block text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded-full text-lg shadow-lg transition duration-300 fade-in-up will-change buy-now-btn" style="transition-delay: 0.4s;">
+                Start Your Gaming Journey Today! <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Enhanced Contact Section -->
+    <section id="contact" class="py-16 md:py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 md:mb-16 fade-in-up">Contact Us</h2>
+            <div class="contact-section max-w-4xl mx-auto p-8 md:p-10 fade-in-up will-change">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <div class="text-center">
+                        <div class="contact-icon mx-auto">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">WhatsApp</h3>
+                        <p class="text-gray-400 mb-4">Fastest way to get in touch with us</p>
+                        <a href="https://wa.me/923259689500" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp mr-2 text-xl"></i> +92 325 9689500
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <div class="contact-icon mx-auto">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">Email</h3>
+                        <p class="text-gray-400 mb-4">For detailed inquiries and support</p>
+                        <a href="mailto:steamstore.110@gmail.com" class="btn-primary inline-block text-white font-bold py-3 px-6 rounded-full text-lg">
+                            <i class="fas fa-envelope mr-2"></i> steamstore.110@gmail.com
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 text-center">
+                    <h3 class="text-xl md:text-2xl font-semibold text-white mb-4">Business Hours</h3>
+                    <p class="text-gray-400">Monday - Sunday: 08:00 AM to 08:00 PM</p>
+                    <p class="text-gray-400 mt-2">Response Time: Within 15 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-10 rounded-t-lg">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://www.daraz.pk/shop/2vnijav2" class="text-gray-400 hover:text-purple-400 transition duration-300 text-xl" aria-label="Daraz">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-xl" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-xl" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-xl" aria-label="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p class="mb-2">&copy; 2025 TheSteamStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Buy Now Popup -->
+    <div class="popup-overlay" id="buyNowPopup">
+        <div class="popup-content">
+            <button class="close-popup" id="closePopup">&times;</button>
+            <div class="text-white mb-6">
+                <div class="text-5xl text-purple-400 mb-4">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">How to Purchase</h3>
+                <p class="text-gray-300">Contact us on WhatsApp: <strong>+92 325 9689500</strong></p>
+                <p class="text-gray-300 mt-4">Send us your requirements and our team will reply within 15 hours with payment details and game delivery.                 
+Note: (The Price is fixed PKR 1499)</p>
+            </div>
+            <a href="https://wa.me/923259689500" class="whatsapp-btn inline-block">
+                <i class="fab fa-whatsapp mr-2 text-xl"></i> Open WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for animations
+            const animateOnScroll = () => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                document.querySelectorAll('.fade-in-up').forEach(el => {
+                    observer.observe(el);
+                });
+            };
+
+            // Lazy load images
+            const lazyLoadImages = () => {
+                const lazyImages = document.querySelectorAll('.lazy');
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src || img.src;
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(img => {
+                    if (img.complete) {
+                        img.classList.add('loaded');
+                    } else {
+                        imageObserver.observe(img);
+                    }
+                });
+            };
+
+            // Smooth scrolling
+            const setupSmoothScrolling = () => {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            };
+
+            // Generate game data
+            const generateGameData = () => {
+                const controllerIcon = "https://i.postimg.cc/W17qM0hb/video-game-controller-logo-icon-vector-illustration-598213-5285.jpg";
+                
+                function getRandomOriginalPrice() {
+                    return Math.floor(Math.random() * (12000 - 2000 + 1)) + 2000;
+                }
+
+                const allGames = [];
+                const gameTitles = [
+                    "Grand Theft Auto", "Call of Duty", "Assassin's Creed", "FIFA", "Battlefield",
+                    "The Witcher", "Cyberpunk", "Red Dead Redemption", "Elden Ring", "Dark Souls",
+                    "Resident Evil", "Far Cry", "Watch Dogs", "Need for Speed", "Forza Horizon",
+                    "Starfield", "Skyrim", "Fallout", "Mass Effect", "Dead Space",
+                    "Dota", "Counter-Strike", "Valorant", "League of Legends", "Overwatch",
+                    "Diablo", "World of Warcraft", "Starcraft", "Age of Empires", "Civilization",
+                    "Sims", "Cities: Skylines", "Euro Truck", "American Truck", "Farming Simulator",
+                    "Minecraft", "Terraria", "Stardew Valley", "Among Us", "Fall Guys",
+                    "Rocket League", "Fortnite", "Apex Legends", "PUBG", "Genshin Impact",
+                    "Final Fantasy", "Dragon Age", "Monster Hunter", "Devil May Cry", "Tekken",
+                    "Street Fighter", "Mortal Kombat", "Soulcalibur", "Dead or Alive", "For Honor",
+                    "Ghost Recon", "Rainbow Six", "Splinter Cell", "Hitman", "Metal Gear",
+                    "God of War", "Horizon Zero Dawn", "Last of Us", "Uncharted", "Spider-Man",
+                    "Batman Arkham", "Middle-earth", "Dying Light", "Dead Island", "Left 4 Dead",
+                    "Borderlands", "Destiny", "Anthem", "Outriders", "Remnant",
+                    "Halo", "Gears of War", "Forza Motorsport", "Sea of Thieves", "State of Decay",
+                    "Alien Isolation", "Amnesia", "Outlast", "Phasmophobia", "Layers of Fear",
+                    "The Forest", "Sons of the Forest", "Green Hell", "The Long Dark", "Subnautica",
+                    "No Man's Sky", "Elite Dangerous", "Star Citizen", "EVE Online", "Warframe",
+                    "Path of Exile", "Grim Dawn", "Torchlight", "Wolcen", "Last Epoch",
+                    "Divinity", "Baldur's Gate", "Pillars of Eternity", "Pathfinder", "Tyranny",
+                    "XCOM", "Phoenix Point", "Gears Tactics", "Wasteland", "Mutant Year Zero",
+                    "Total War", "Crusader Kings", "Europa Universalis", "Stellaris", "Hearts of Iron",
+                    "Company of Heroes", "Men of War", "Wargame", "Steel Division", "Command & Conquer"
+                ];
+
+                for (let i = 0; i < 500; i++) {
+                    const titleIndex = i % gameTitles.length;
+                    const version = Math.floor(i / gameTitles.length) + 1;
+                    const gameName = version > 1 ? `${gameTitles[titleIndex]} ${version}` : gameTitles[titleIndex];
+
+                    allGames.push({
+                        name: gameName,
+                        icon: controllerIcon,
+                        originalPrice: getRandomOriginalPrice()
+                    });
+                }
+
+                return allGames;
+            };
+
+            // Render game lists with virtualization for better performance
+            const renderGameLists = () => {
+                const allGames = generateGameData();
+                const gameList = document.getElementById('game-list');
+                const originalPriceList = document.getElementById('original-price-list');
+                const discountedPriceList = document.getElementById('discounted-price-list');
+                
+                // Clear existing content
+                gameList.innerHTML = '';
+                originalPriceList.innerHTML = '';
+                discountedPriceList.innerHTML = '';
+                
+                // Render in chunks for better performance
+                const chunkSize = 50;
+                const totalChunks = Math.ceil(allGames.length / chunkSize);
+                
+                let currentChunk = 0;
+                
+                const renderNextChunk = () => {
+                    const start = currentChunk * chunkSize;
+                    const end = Math.min(start + chunkSize, allGames.length);
+                    
+                    const fragmentGame = document.createDocumentFragment();
+                    const fragmentOriginal = document.createDocumentFragment();
+                    const fragmentDiscounted = document.createDocumentFragment();
+                    
+                    for (let i = start; i < end; i++) {
+                        const game = allGames[i];
+                        const delay = i * 20;
+                        
+                        // Game item
+                        const gameItem = document.createElement('div');
+                        gameItem.className = 'game-item will-change';
+                        gameItem.style.animationDelay = `${delay}ms`;
+                        gameItem.innerHTML = `
+                            <img src="${game.icon}" alt="${game.name}" class="game-icon lazy" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/50x50/2d3748/e2e8f0?text=🎮';">
+                            <span class="game-name">${game.name}</span>
+                        `;
+                        fragmentGame.appendChild(gameItem);
+                        
+                        // Original price
+                        const originalPriceItem = document.createElement('div');
+                        originalPriceItem.className = 'game-item will-change';
+                        originalPriceItem.style.animationDelay = `${delay}ms`;
+                        originalPriceItem.innerHTML = `<span class="original-price">PKR ${game.originalPrice}</span>`;
+                        fragmentOriginal.appendChild(originalPriceItem);
+                        
+                        // Discounted price
+                        const discountedPriceItem = document.createElement('div');
+                        discountedPriceItem.className = 'game-item will-change';
+                        discountedPriceItem.style.animationDelay = `${delay}ms`;
+                        discountedPriceItem.innerHTML = `<span class="discounted-price">PKR 1499</span>`;
+                        fragmentDiscounted.appendChild(discountedPriceItem);
+                    }
+                    
+                    gameList.appendChild(fragmentGame);
+                    originalPriceList.appendChild(fragmentOriginal);
+                    discountedPriceList.appendChild(fragmentDiscounted);
+                    
+                    currentChunk++;
+                    
+                    if (currentChunk < totalChunks) {
+                        requestAnimationFrame(renderNextChunk);
+                    } else {
+                        // Add event listeners after all items are rendered
+                        document.querySelectorAll('.game-item').forEach(item => {
+                            item.addEventListener('mouseenter', () => {
+                                item.style.transform = 'translateX(5px)';
+                                item.style.background = 'rgba(0, 180, 216, 0.1)';
+                            });
+                            item.addEventListener('mouseleave', () => {
+                                item.style.transform = '';
+                                item.style.background = '';
+                            });
+                        });
+                    }
+                };
+                
+                renderNextChunk();
+            };
+
+            // Buy Now Popup functionality
+            const buyNowPopup = document.getElementById('buyNowPopup');
+            const closePopup = document.getElementById('closePopup');
+            
+            // Add click event to all Buy Now buttons
+            document.querySelectorAll('.buy-now-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    buyNowPopup.classList.add('active');
+                });
+            });
+            
+            // Close popup when clicking close button or outside
+            closePopup.addEventListener('click', () => {
+                buyNowPopup.classList.remove('active');
+            });
+            
+            buyNowPopup.addEventListener('click', (e) => {
+                if (e.target === buyNowPopup) {
+                    buyNowPopup.classList.remove('active');
+                }
+            });
+
+            // Initialize all functions
+            animateOnScroll();
+            lazyLoadImages();
+            setupSmoothScrolling();
+            renderGameLists();
+        });
+    </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
