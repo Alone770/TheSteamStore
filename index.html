@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="store logo.png">
-  <title>The Steam Store</title>
-  
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover 500 best-selling PC games at unbeatable prices in Pakistan. All games for just PKR 1499!">
+    <meta name="description" content="Buy best-selling PC games in Pakistan at PKR 1499 only. Instant delivery, secure payments with JazzCash/Easypaisa. 500+ games available.">
+    <meta name="keywords" content="steam games pakistan, pc games cheap, buy games pakistan, jazzcash payment, easypaisa payment, game keys">
+    <meta name="author" content="TheSteamStore">
+    <meta property="og:title" content="500 Best-Selling PC Games - TheSteamStore Pakistan">
+    <meta property="og:description" content="Discover 500 best-selling PC games at unbeatable prices in Pakistan. All games for just PKR 1499!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thesteamstore.pk">
     <title>500 Best-Selling PC Games - TheSteamStore Pakistan</title>
+    <link rel="icon" type="image/png" href="store-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -297,6 +293,242 @@
             transform: translateY(-2px);
         }
 
+        /* New styles for shopping cart */
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #00B4D8;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1A1A2E, #16213E);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            border-left: 1px solid #00B4D8;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        
+        .remove-item {
+            color: #FF6B6B;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            text-align: right;
+        }
+        
+        /* Payment methods */
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            background: rgba(0, 180, 216, 0.1);
+        }
+        
+        .payment-method img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+        
+        /* Search bar */
+        .search-container {
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-left: 45px;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 2px #00B4D8;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Game categories */
+        .category-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .category-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-tab:hover, .category-tab.active {
+            background: #00B4D8;
+            color: white;
+        }
+        
+        /* Key delivery interface */
+        .delivery-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .delivery-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active .step-number {
+            background: #00B4D8;
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background: #00B894;
+            color: white;
+        }
+        
+        .step-text {
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        .step.active .step-text, .step.completed .step-text {
+            opacity: 1;
+            font-weight: 500;
+        }
+        
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .faq-question {
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .faq-answer {
+            padding-bottom: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .game-grid {
@@ -314,6 +546,13 @@
             .hero-bg-animation {
                 animation: gradientAnimation 30s ease infinite;
             }
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            .cart-sidebar.open {
+                right: 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -322,6 +561,22 @@
             }
             .hero p {
                 font-size: 1.1rem;
+            }
+            .delivery-steps {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .delivery-steps::before {
+                display: none;
+            }
+            .step {
+                flex-direction: row;
+                gap: 15px;
+                align-items: center;
+            }
+            .step-text {
+                text-align: left;
             }
         }
     </style>
@@ -340,21 +595,84 @@
                     THESTEAMSTORE
                 </span>
             </a>
+            
+            <!-- Search Bar - Mobile -->
+            <div class="w-full md:hidden mt-4">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="mobile-search" class="search-input" placeholder="Search games...">
+                </div>
+            </div>
+            
             <nav class="mt-4 md:mt-0">
                 <ul class="flex flex-wrap justify-center gap-2 md:gap-6">
                     <li><a href="#home" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">Home</a></li>
                     <li><a href="#top-selling-games" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">Top Games</a></li>
                     <li><a href="#game-listing" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">All Games</a></li>
-                    <li><a href="#about" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">About</a></li>
+                    <li><a href="#faq" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">FAQ</a></li>
                     <li><a href="#contact" class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2">Contact</a></li>
+                    <li>
+                        <button class="text-gray-300 hover:text-purple-400 transition duration-300 font-medium rounded-md p-2 cart-icon" id="cart-button">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </button>
+                    </li>
                 </ul>
             </nav>
         </div>
+        
+        <!-- Search Bar - Desktop -->
+        <div class="container mx-auto px-4 hidden md:block">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="desktop-search" class="search-input" placeholder="Search 500+ games...">
+            </div>
+        </div>
     </header>
 
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold">Your Cart</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        
+        <div id="cart-items-container">
+            <!-- Cart items will be added here dynamically -->
+            <p class="text-gray-400 text-center py-10">Your cart is empty</p>
+        </div>
+        
+        <div class="cart-total hidden" id="cart-total">
+            Total: <span id="total-amount">PKR 0</span>
+        </div>
+        
+        <div class="hidden" id="checkout-section">
+            <h4 class="font-bold mb-3">Payment Methods</h4>
+            
+            <div class="payment-method">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/JazzCash_logo_%282025%29.png" alt="JazzCash">
+                <div>
+                    <div class="font-medium">JazzCash</div>
+                    <div class="text-sm text-gray-400">03023749806</div>
+                </div>
+            </div>
+            
+            <div class="payment-method">
+                <img src="https://crystalpng.com/wp-content/uploads/2024/10/Easypaisa-logo.png" alt="EasyPaisa">
+                <div>
+                    <div class="font-medium">EasyPaisa</div>
+                    <div class="text-sm text-gray-400">03023749806</div>
+                </div>
+            </div>
+            
+            <button class="btn-primary w-full text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 mt-6" id="checkout-btn">
+                Complete Purchase <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Hero Section -->
-      <div class="text-center py-4 bg-gray-900 text-3xl md:text-4xl font-bold text-purple-400">
+    <div class="text-center py-4 bg-gray-900 text-3xl md:text-4xl font-bold text-purple-400">
         <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
             THE STEAM STORE
         </span>
@@ -374,14 +692,26 @@
         </div>
     </section>
 
-    <!-- Top Selling Games - Adjusted box sizes -->
+    <!-- Top Selling Games -->
     <section id="top-selling-games" class="py-16 md:py-20 bg-gray-800 rounded-t-lg">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 md:mb-16 fade-in-up">Top Selling Games</h2>
+            
+            <!-- Game Categories -->
+            <div class="category-tabs mb-8">
+                <div class="category-tab active" data-category="all">All Games</div>
+                <div class="category-tab" data-category="action">Action</div>
+                <div class="category-tab" data-category="adventure">Adventure</div>
+                <div class="category-tab" data-category="rpg">RPG</div>
+                <div class="category-tab" data-category="sports">Sports</div>
+                <div class="category-tab" data-category="strategy">Strategy</div>
+                <div class="category-tab" data-category="shooter">Shooter</div>
+            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 <!-- Game Card 1 -->
-                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.1s;">
-                    <img src="https://products.eneba.games/resized-products/s29Db6ZBVLneuD0t66qnYRamvGDP3p8chLz-3IomxcU_350x200_1x-0.jpeg" 
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.1s;" data-categories="action,adventure">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg" 
                          alt="Grand Theft Auto V" 
                          class="w-full h-auto object-cover rounded-t-xl lazy" 
                          loading="lazy"
@@ -390,17 +720,20 @@
                         <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Grand Theft Auto V</h3>
                         <p class="text-gray-400 text-sm mb-4">Experience the critically acclaimed open-world adventure.</p>
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
-                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
-                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            <div>
+                                <span class="original-price block">PKR 7999</span>
+                                <span class="discounted-price">PKR 1499</span>
+                            </div>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn" data-game="Grand Theft Auto V" data-price="1499" data-image="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Game Card 2 -->
-                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.2s;">
-                    <img src="https://www.venturegames.com.pk/cdn/shop/files/MarvelsSpiderman2.jpg?v=1706792782" 
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.2s;" data-categories="action,adventure">
+                    <img src="https://sonyinteractive.com/tachyon/2023/10/Marvels-Spider-Man-2_Key-Art.png?fit=1024%2C1024" 
                          alt="Marvel's Spider-Man 2" 
                          class="w-full h-auto object-cover rounded-t-xl lazy" 
                          loading="lazy"
@@ -409,47 +742,58 @@
                         <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Marvel's Spider-Man 2</h3>
                         <p class="text-gray-400 text-sm mb-4">Swing through New York and fight crime as the iconic web-slinger.</p>
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
-                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
-                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            <div>
+                                <span class="original-price block">PKR 6999</span>
+                                <span class="discounted-price">PKR 1499</span>
+                            </div>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn" data-game="Marvel's Spider-Man 2" data-price="1499" data-image="https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/header.jpg">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Game Card 3 -->
-                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.3s;">
-                    <img src="https://www.venturegames.com.pk/cdn/shop/files/rn-image_picker_lib_temp_b41f3e70-5e44-4fc5-91b1-98ffb1215eb4.jpg?v=1742237604" 
-                         alt="Assassin's Creed Shadows" 
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.3s;" data-categories="action,rpg">
+                    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg" 
+                         alt="Resident Evil 4" 
                          class="w-full h-auto object-cover rounded-t-xl lazy" 
                          loading="lazy"
                          style="max-height: 720px;">
                     <div class="p-4 md:p-6">
-                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Assassin's Creed Shadows</h3>
-                        <p class="text-gray-400 text-sm mb-4">Unleash your inner assassin in feudal Japan.</p>
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Resident evil 4</h3>
+                        <p class="text-gray-400 text-sm mb-4">Featuring modernized gameplay, a reimagined storyline, and vividly detailed graphics, Resident Evil 4 marks the rebirth of an industry juggernaut.</p>
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
-                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
-                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            <div>
+                                <span class="original-price block">PKR 8999</span>
+                                <span class="discounted-price">PKR 1499</span>
+                            </div>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn" data-game="Assassin's Creed Shadows" data-price="1499" data-image="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Game Card 4 -->
-                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.4s;">
-                    <img src="https://i.postimg.cc/fRtS9dNp/d563ebf9-f807-4348-90d4-9f79f0fb3dca.webp" 
-                         alt="Oblivion Remastered" 
+                <div class="game-card rounded-xl overflow-hidden shadow-xl fade-in-up will-change" style="transition-delay: 0.4s;" data-categories="rpg,adventure">
+                    <img src="https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/1RLdppgLllgGZlkjuvHBu6/237f7e968827f4abda462a311a0f1faf/RED_KEYART_STD_RGB_WW.jpg" 
+                         alt="Assasin's creed shadows" 
                          class="w-full h-auto object-cover rounded-t-xl lazy" 
                          loading="lazy"
                          style="max-height: 720px;">
                     <div class="p-4 md:p-6">
-                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Oblivion Remastered</h3>
-                        <p class="text-gray-400 text-sm mb-4">Revisit the classic RPG with stunning modern graphics.</p>
+                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">Assasin's creed shadows</h3>
+                        <p class="text-gray-400 text-sm mb-4">Unleash your inner assassin in feudal Japan.
+
+</p>
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <span class="text-2xl md:text-3xl font-bold text-purple-400">PKR 1499</span>
-                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn">
-                                Buy Now <i class="fas fa-shopping-cart ml-2"></i>
+                            <div>
+                                <span class="original-price block">PKR 3999</span>
+                                <span class="discounted-price">PKR 1499</span>
+                            </div>
+                            <button class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition duration-300 w-full sm:w-auto buy-now-btn" data-game="Assasin's creed shadows" data-price="1499" data-image="https://cdn.cloudflare.steamstatic.com/steam/apps/22330/header.jpg">
+                                Add to Cart <i class="fas fa-shopping-cart ml-2"></i>
                             </button>
                         </div>
                     </div>
@@ -511,24 +855,150 @@
         </div>
     </section>
 
-    <!-- Testimonial -->
+    <!-- Testimonial Section -->
     <section class="py-16 md:py-20 bg-gray-900">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 md:mb-10 fade-in-up">What Our Gamers Say</h2>
-            <div class="max-w-3xl mx-auto bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 mb-10 md:mb-12 fade-in-up will-change" style="transition-delay: 0.2s;">
-                <div class="text-yellow-400 mb-4">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 fade-in-up will-change" style="transition-delay: 0.1s;">
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-lg md:text-xl text-gray-300 italic mb-6">"I got GTA V within minutes of payment! TheSteamStore is legit and has the best prices in Pakistan."</p>
+                    <p class="text-purple-400 font-semibold">- Ahmed Khan, Lahore</p>
                 </div>
-                <p class="text-lg md:text-xl text-gray-300 italic mb-6">"TheSteamStore is my go-to for affordable games! The instant delivery is fantastic, and the price of PKR 1499 is simply unbeatable. Highly recommended!"</p>
-                <p class="text-purple-400 font-semibold">- Muhammad Ali, Karachi</p>
+                
+                <div class="bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 fade-in-up will-change" style="transition-delay: 0.2s;">
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-lg md:text-xl text-gray-300 italic mb-6">"The JazzCash payment option made it so easy. Received my key instantly after payment confirmation."</p>
+                    <p class="text-purple-400 font-semibold">- Fatima Ali, Islamabad</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 fade-in-up will-change" style="transition-delay: 0.3s;">
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-lg md:text-xl text-gray-300 italic mb-6">"500+ games at PKR 1499 is insane value! Customer support via WhatsApp is very responsive too."</p>
+                    <p class="text-purple-400 font-semibold">- Bilal Ahmed, Karachi</p>
+                </div>
             </div>
+            
             <a href="#game-listing" class="btn-primary inline-block text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded-full text-lg shadow-lg transition duration-300 fade-in-up will-change buy-now-btn" style="transition-delay: 0.4s;">
                 Start Your Gaming Journey Today! <i class="fas fa-arrow-right ml-2"></i>
             </a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 md:py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 md:mb-16 fade-in-up">Frequently Asked Questions</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="faq-item fade-in-up will-change" style="transition-delay: 0.1s;">
+                    <div class="faq-question">
+                        <span>How does the instant delivery work?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>After completing your payment via JazzCash or EasyPaisa, simply send us the transaction screenshot on WhatsApp. We'll verify the payment and send your game key instantly via WhatsApp/Email.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up will-change" style="transition-delay: 0.2s;">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept JazzCash and EasyPaisa payments in Pakistan. Our JazzCash number is 03023749806 and EasyPaisa number is the same. International customers can contact us for PayPal options.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up will-change" style="transition-delay: 0.3s;">
+                    <div class="faq-question">
+                        <span>Are these genuine Steam keys?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All our game keys are 100% genuine and purchased directly from authorized distributors. They redeem on official Steam platforms with full warranty.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up will-change" style="transition-delay: 0.4s;">
+                    <div class="faq-question">
+                        <span>What if a game doesn't work after purchase?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer full support for all purchases. If you have any issues redeeming a key, contact us immediately on WhatsApp and we'll resolve it or provide a replacement.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up will-change" style="transition-delay: 0.5s;">
+                    <div class="faq-question">
+                        <span>Can I get a refund if I change my mind?</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Due to the digital nature of our products, we can only offer refunds if the key hasn't been redeemed and you contact us within 24 hours of purchase.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Delivery Process -->
+    <section class="py-16 md:py-20 bg-gray-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 md:mb-16 fade-in-up">Simple 3-Step Delivery Process</h2>
+            
+            <div class="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-xl p-8 fade-in-up will-change">
+                <div class="delivery-steps">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Add games to cart and checkout</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Complete payment via JazzCash/EasyPaisa</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Receive key instantly on WhatsApp/Email</div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-left">
+                        <h3 class="text-xl font-semibold mb-3 text-purple-400">Step 1: Select Games</h3>
+                        <p class="text-gray-400">Browse our collection and add your favorite games to the cart. All games are priced at just PKR 1499.</p>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="text-xl font-semibold mb-3 text-purple-400">Step 2: Secure Payment</h3>
+                        <p class="text-gray-400">Pay via JazzCash (03023749806) or EasyPaisa and send us the transaction screenshot on WhatsApp.</p>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="text-xl font-semibold mb-3 text-purple-400">Step 3: Instant Delivery</h3>
+                        <p class="text-gray-400">Receive your Steam key instantly via WhatsApp or Email after payment verification.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -536,33 +1006,73 @@
     <section id="contact" class="py-16 md:py-20 bg-gray-800">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 md:mb-16 fade-in-up">Contact Us</h2>
-            <div class="contact-section max-w-4xl mx-auto p-8 md:p-10 fade-in-up will-change">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <div class="text-center">
-                        <div class="contact-icon mx-auto">
-                            <i class="fab fa-whatsapp"></i>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="contact-section p-8 md:p-10 fade-in-up will-change">
+                    <h3 class="text-xl md:text-2xl font-semibold text-white mb-6">Get in Touch</h3>
+                    
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">WhatsApp</h3>
-                        <p class="text-gray-400 mb-4">Fastest way to get in touch with us</p>
-                        <a href="https://wa.me/923259689500" class="whatsapp-btn">
-                            <i class="fab fa-whatsapp mr-2 text-xl"></i> +92 325 9689500
-                        </a>
-                    </div>
-                    <div class="text-center">
-                        <div class="contact-icon mx-auto">
-                            <i class="fas fa-envelope"></i>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-300 mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">Email</h3>
-                        <p class="text-gray-400 mb-4">For detailed inquiries and support</p>
-                        <a href="mailto:steamstore.110@gmail.com" class="btn-primary inline-block text-white font-bold py-3 px-6 rounded-full text-lg">
-                            <i class="fas fa-envelope mr-2"></i> steamstore.110@gmail.com
-                        </a>
-                    </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-300 mb-2">Your Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transition duration-300 mt-4">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
                 </div>
-                <div class="mt-12 text-center">
-                    <h3 class="text-xl md:text-2xl font-semibold text-white mb-4">Business Hours</h3>
-                    <p class="text-gray-400">Monday - Sunday: 08:00 AM to 08:00 PM</p>
-                    <p class="text-gray-400 mt-2">Response Time: Within 15 hours</p>
+                
+                <div class="contact-section p-8 md:p-10 fade-in-up will-change" style="transition-delay: 0.2s;">
+                    <div class="grid grid-cols-1 gap-8 md:gap-12">
+                        <div class="text-center">
+                            <div class="contact-icon mx-auto">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">WhatsApp</h3>
+                            <p class="text-gray-400 mb-4">Fastest way to get in touch with us</p>
+                            <a href="https://wa.me/923259689500" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> +92 325 9689500
+                            </a>
+                        </div>
+                        <div class="text-center">
+                            <div class="contact-icon mx-auto">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-white mb-3">Email</h3>
+                            <p class="text-gray-400 mb-4">For detailed inquiries and support</p>
+                            <a href="mailto:steamstore.110@gmail.com" class="btn-primary inline-block text-white font-bold py-3 px-6 rounded-full text-lg">
+                                <i class="fas fa-envelope mr-2"></i> steamstore.110@gmail.com
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <h3 class="text-xl font-semibold text-white mb-4">Follow Us</h3>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl" aria-label="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl" aria-label="Discord">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -586,6 +1096,7 @@
                 </a>
             </div>
             <p class="mb-2">&copy; 2025 TheSteamStore. All rights reserved.</p>
+            <p class="text-sm">All game keys are sold with official distributor warranties.</p>
         </div>
     </footer>
 
@@ -608,8 +1119,281 @@ Note: (The Price is fixed PKR 1499)</p>
         </div>
     </div>
 
+    <!-- Checkout Success Popup -->
+    <div class="popup-overlay" id="successPopup">
+        <div class="popup-content">
+            <button class="close-popup" id="closeSuccessPopup">&times;</button>
+            <div class="text-white mb-6">
+                <div class="text-5xl text-green-400 mb-4">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Order Placed Successfully!</h3>
+                <p class="text-gray-300">Thank you for your purchase. Please send your payment screenshot to our WhatsApp number to receive your game keys instantly.</p>
+                <div class="mt-4 p-4 bg-gray-700 rounded-lg">
+                    <p class="font-semibold">Order Summary:</p>
+                    <div id="order-summary" class="mt-2 text-sm"></div>
+                </div>
+            </div>
+            <a href="https://wa.me/923259689500" class="whatsapp-btn inline-block">
+                <i class="fab fa-whatsapp mr-2 text-xl"></i> Send Payment Proof
+            </a>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Shopping cart functionality
+            const cartButton = document.getElementById('cart-button');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const closeCart = document.getElementById('close-cart');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutSection = document.getElementById('checkout-section');
+            const totalAmount = document.getElementById('total-amount');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const successPopup = document.getElementById('successPopup');
+            const closeSuccessPopup = document.getElementById('closeSuccessPopup');
+            const orderSummary = document.getElementById('order-summary');
+            
+            let cart = [];
+            let cartCount = 0;
+            
+            // Update cart count display
+            function updateCartCount() {
+                const cartCountElement = document.querySelector('.cart-count');
+                cartCountElement.textContent = cartCount;
+            }
+            
+            // Update cart total
+            function updateCartTotal() {
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                totalAmount.textContent = `PKR ${total}`;
+                
+                if (cart.length > 0) {
+                    cartTotal.classList.remove('hidden');
+                    checkoutSection.classList.remove('hidden');
+                } else {
+                    cartTotal.classList.add('hidden');
+                    checkoutSection.classList.add('hidden');
+                }
+            }
+            
+            // Render cart items
+            function renderCartItems() {
+                cartItemsContainer.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center py-10">Your cart is empty</p>';
+                    return;
+                }
+                
+                cart.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="lazy" loading="lazy">
+                        <div class="cart-item-details">
+                            <div class="font-medium">${item.name}</div>
+                            <div class="text-sm text-purple-400">PKR ${item.price}</div>
+                        </div>
+                        <button class="remove-item" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const index = e.currentTarget.getAttribute('data-index');
+                        cart.splice(index, 1);
+                        cartCount--;
+                        updateCartCount();
+                        renderCartItems();
+                        updateCartTotal();
+                    });
+                });
+            }
+            
+            // Toggle cart sidebar
+            cartButton.addEventListener('click', () => {
+                cartSidebar.classList.add('open');
+            });
+            
+            closeCart.addEventListener('click', () => {
+                cartSidebar.classList.remove('open');
+            });
+            
+            // Checkout button
+            checkoutBtn.addEventListener('click', () => {
+                // Generate order summary
+                let summaryHTML = '';
+                cart.forEach(item => {
+                    summaryHTML += `<div class="flex justify-between py-1 border-b border-gray-600">
+                        <span>${item.name}</span>
+                        <span>PKR ${item.price}</span>
+                    </div>`;
+                });
+                
+                summaryHTML += `<div class="flex justify-between py-2 font-bold mt-2">
+                    <span>Total:</span>
+                    <span>${totalAmount.textContent}</span>
+                </div>`;
+                
+                orderSummary.innerHTML = summaryHTML;
+                
+                // Show success popup
+                successPopup.classList.add('active');
+                cartSidebar.classList.remove('open');
+                
+                // Clear cart
+                cart = [];
+                cartCount = 0;
+                updateCartCount();
+                renderCartItems();
+                updateCartTotal();
+            });
+            
+            closeSuccessPopup.addEventListener('click', () => {
+                successPopup.classList.remove('active');
+            });
+            
+            successPopup.addEventListener('click', (e) => {
+                if (e.target === successPopup) {
+                    successPopup.classList.remove('active');
+                }
+            });
+            
+            // Add to cart functionality
+            document.querySelectorAll('.buy-now-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const game = e.currentTarget.getAttribute('data-game');
+                    const price = parseInt(e.currentTarget.getAttribute('data-price'));
+                    const image = e.currentTarget.getAttribute('data-image');
+                    
+                    cart.push({
+                        name: game,
+                        price: price,
+                        image: image
+                    });
+                    
+                    cartCount++;
+                    updateCartCount();
+                    renderCartItems();
+                    updateCartTotal();
+                    
+                    // Show a quick notification
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+                    notification.textContent = `${game} added to cart!`;
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 3000);
+                });
+            });
+            
+            // Game category filtering
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active tab
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const category = tab.getAttribute('data-category');
+                    
+                    // Filter game cards
+                    document.querySelectorAll('.game-card').forEach(card => {
+                        if (category === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            const categories = card.getAttribute('data-categories');
+                            if (categories && categories.includes(category)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // FAQ accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Toggle active class
+                    item.classList.toggle('active');
+                    
+                    // Rotate chevron icon
+                    const icon = question.querySelector('i');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // Here you would typically send this data to your server
+                // For demo purposes, we'll just show a success message
+                
+                const notification = document.createElement('div');
+                notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+                notification.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Message sent successfully!';
+                document.body.appendChild(notification);
+                
+                // Clear form
+                contactForm.reset();
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            });
+            
+            // Search functionality
+            const searchInputs = document.querySelectorAll('.search-input');
+            
+            searchInputs.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    
+                    // Search in game cards
+                    document.querySelectorAll('.game-card').forEach(card => {
+                        const gameName = card.querySelector('h3').textContent.toLowerCase();
+                        if (gameName.includes(searchTerm)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    // Search in game list (for the full listing section)
+                    document.querySelectorAll('.game-item').forEach(item => {
+                        const gameName = item.querySelector('.game-name').textContent.toLowerCase();
+                        if (gameName.includes(searchTerm)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
             // Intersection Observer for animations
             const animateOnScroll = () => {
                 const observer = new IntersectionObserver((entries) => {
@@ -669,7 +1453,7 @@ Note: (The Price is fixed PKR 1499)</p>
 
             // Generate game data
             const generateGameData = () => {
-                const controllerIcon = "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTExL3Jhd3BpeGVsb2ZmaWNlMl9zaW1wbGVfbGluZV9uZW9uX29mX2dhbWVfaWNvbl9pbl90aGVfc3R5bGVfb2ZfcF8wZjE3ZjFhNC1kYjBiLTQyNDYtYWEzNC00NzFkM2M2MzJiNzBfMi5qcGc.jpg";
+                const controllerIcon = "https://images.vexels.com/media/users/3/208298/isolated/preview/288f9cd4b6ae6ed6eaa8a4b3a4bfca65-joystick-gamer-stroke-icon.png";
                 
                 function getRandomOriginalPrice() {
                     return Math.floor(Math.random() * (12000 - 2000 + 1)) + 2000;
@@ -792,6 +1576,33 @@ Note: (The Price is fixed PKR 1499)</p>
                                 item.style.transform = '';
                                 item.style.background = '';
                             });
+                            
+                            // Add to cart on click
+                            item.addEventListener('click', () => {
+                                const gameName = item.querySelector('.game-name').textContent;
+                                const gamePrice = 1499;
+                                
+                                cart.push({
+                                    name: gameName,
+                                    price: gamePrice,
+                                    image: 'https://placehold.co/50x50/2d3748/e2e8f0?text=🎮'
+                                });
+                                
+                                cartCount++;
+                                updateCartCount();
+                                renderCartItems();
+                                updateCartTotal();
+                                
+                                // Show notification
+                                const notification = document.createElement('div');
+                                notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+                                notification.textContent = `${gameName} added to cart!`;
+                                document.body.appendChild(notification);
+                                
+                                setTimeout(() => {
+                                    notification.remove();
+                                }, 3000);
+                            });
                         });
                     }
                 };
@@ -827,11 +1638,10 @@ Note: (The Price is fixed PKR 1499)</p>
             lazyLoadImages();
             setupSmoothScrolling();
             renderGameLists();
+            updateCartCount();
+            renderCartItems();
+            updateCartTotal();
         });
     </script>
-</body>
-</html>
-<!-- partial -->
-  
 </body>
 </html>
